@@ -1,0 +1,47 @@
+# Uncomment the next line to define a global platform for your project
+ platform :ios, '9.0'
+
+target 'rnfirebaserepro' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+   use_frameworks!
+   
+   # Explicitly include Yoga if you are using RN >= 0.42.0
+   pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+   
+   # Third party deps podspec link
+   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+   # Your 'node_modules' directory is probably in the root of your project,
+   # but if not, adjust the `:path` accordingly
+   pod 'React', :path => '../node_modules/react-native', :subspecs => [
+   'Core',
+   'CxxBridge', # Include this for RN >= 0.47
+   'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
+   'RCTText',
+   'RCTNetwork',
+   'RCTWebSocket', # Needed for debugging
+   'RCTAnimation', # Needed for FlatList and animations running on native UI thread
+   'RCTActionSheet',
+   'RCTBlob',
+   'RCTGeolocation',
+   'RCTImage',
+   'RCTVibration',
+   'RCTSettings',
+   'RCTLinkingIOS',
+   'RCTPushNotification'
+   ]
+
+  # Pods for rnfirebaserepro
+  
+  pod 'Firebase/Core', '~> 5.15.0'
+  pod 'Firebase/Messaging', '~> 5.15.0'
+  pod 'GoogleAppMeasurement', '~> 5.4.0'
+
+end
+
+
+post_install do |installer|
+    system("mkdir -p Pods/Headers/Public/FirebaseCore && cp Pods/FirebaseCore/Firebase/Core/Public/* Pods/Headers/Public/FirebaseCore/")
+end
+

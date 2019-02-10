@@ -1,0 +1,6 @@
+framework module Pods_rnfirebaserepro {
+  umbrella header "Pods-rnfirebaserepro-umbrella.h"
+
+  export *
+  module * { export * }
+}
